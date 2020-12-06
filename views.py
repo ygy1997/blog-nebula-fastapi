@@ -1,26 +1,13 @@
-from nebula.graph import ttypes
-from nebula.ConnectionPool import ConnectionPool
-from nebula.Client import GraphClient
+from nebulaApi.connect import runGql
 
-
-connection_pool = ConnectionPool('127.0.0.1', 3699)
-client = GraphClient(connection_pool)
-auth_resp = client.authenticate('user', 'password')
-
-def getDb():
-    query_resp = client.execute_query('SHOW SPACES')
+def getAllGraph():
+    query_resp = runGql('SHOW SPACES')
     return query_resp
 
-def createDb(dbName):
-    query_resp = client.execute_query(f'CREATE SPACE {dbName}')
+def createGraph(dbName):
+    query_resp = runGql(f'CREATE SPACE {dbName}')
     return query_resp
 
-def deleDb(dbName):
-    query_resp = client.execute_query(f'DROP  SPACE {dbName}')
+def deletGraph(dbName):
+    query_resp = runGql(f'DROP  SPACE {dbName}')
     return query_resp
-
-def creatDbNode(dbName,Node):
-    pass
-
-def creatDbEdge(dbName,Edge):
-    pass
